@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Bus, LogOut, User as UserIcon } from "lucide-react";
+import { Bus, LogOut, User as UserIcon, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import {
@@ -9,10 +9,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerClose,
+  DrawerHeader,
+  DrawerOverlay,
+} from "@/components/ui/drawer";
+import { useState } from "react";
 
 export function SiteHeader() {
   const { user, signOut, hasRole } = useAuth();
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -64,7 +75,7 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -104,10 +115,59 @@ export function SiteHeader() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm" onClick={() => navigate({ to: "/auth" })}>
+            <Button size="sm" className="bg-primary" onClick={() => navigate({ to: "/auth" })}>
               Sign in
             </Button>
           )}
+
+        </div>
+
+        {/* Mobile actions: hamburger + drawer */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Drawer open={open} onOpenChange={(v) => setOpen(v)}>
+            <DrawerTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Open menu">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <div className="flex items-center justify-between">
+                  <Link to="/" className="flex items-center gap-2">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary">
+                      <Bus className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-lg font-bold tracking-tight">WayGo</span>
+                  </Link>
+                  <DrawerClose asChild>
+                    <Button variant="ghost" size="icon" aria-label="Close menu">
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </DrawerClose>
+                </div>
+              </DrawerHeader>
+              <div className="p-4 space-y-3">
+                <Link to="/" className="block text-lg font-medium">
+                  Home
+                </Link>
+                <Link to="/about" className="block text-lg font-medium">
+                  About
+                </Link>
+                <Link to="/contact" className="block text-lg font-medium">
+                  Contact
+                </Link>
+                {user ? (
+                  <Button size="sm" onClick={() => navigate({ to: "/dashboard" })}>
+                    My Bookings
+                  </Button>
+                ) : (
+                  <Button size="sm" onClick={() => navigate({ to: "/auth" })}>
+                    Sign in
+                  </Button>
+                )}
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
     </header>
