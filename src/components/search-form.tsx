@@ -1,11 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Calendar, Car, MapPin, Bus as BusIcon, Search, Users } from "lucide-react";
+import { Calendar, Car, MapPin, Bus as BusIcon, Search, Users, ArrowLeftRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SwapButton } from "@/components/swap-button";
 import type { VehicleType } from "@/lib/mock-results";
 import { POPULAR_CITIES } from "@/lib/mock-results";
 
@@ -31,8 +30,11 @@ export function SearchForm({ initial }: Props) {
   const [to, setTo] = useState(initial?.to ?? "");
   const [date, setDate] = useState(initial?.date ?? today);
   const [returnDate, setReturnDate] = useState(initial?.returnDate ?? "");
+  const [swapAnim, setSwapAnim] = useState(false);
 
   function swap() {
+    setSwapAnim(true);
+    setTimeout(() => setSwapAnim(false), 300);
     setFrom(to);
     setTo(from);
   }
@@ -108,7 +110,7 @@ export function SearchForm({ initial }: Props) {
       )}
 
       {/* Search Form Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-3 relative">
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-3 relative ${swapAnim ? "swap-animate" : ""}`}>
         {/* Pickup Location */}
         <div className="space-y-2">
           <Label htmlFor="from" className="text-xs font-semibold text-foreground/60 uppercase tracking-wide">
@@ -151,7 +153,16 @@ export function SearchForm({ initial }: Props) {
           </div>
           {/* Swap Button - positioned between fields on desktop */}
           <div className="hidden lg:block absolute -right-6 top-12">
-            <SwapButton onClick={swap} />
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={swap}
+              aria-label="Swap locations"
+              className={`rounded-full transition-transform ${swapAnim ? "rotate-180" : ""}`}
+            >
+              <ArrowLeftRight className="h-4 w-4" />
+            </Button>
           </div>
         </div>
 

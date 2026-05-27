@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Bus, LogOut, User as UserIcon, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -150,13 +151,24 @@ export function SiteHeader() {
                   <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary">
                       <Bus className="h-5 w-5 text-primary-foreground" />
-                    </div>
+                import { useState } from "react";
                     <span className="text-lg font-bold tracking-tight">WayGo</span>
                   </Link>
                   <DrawerClose asChild>
                     <Button variant="ghost" size="icon" aria-label="Close menu" className="hover:bg-white/10">
+                  const [open, setOpen] = useState(false);
+                  const [scrolled, setScrolled] = useState(false);
+
+                  useEffect(() => {
+                    function onScroll() {
+                      setScrolled(window.scrollY > 24);
+                    }
+                    onScroll();
+                    window.addEventListener("scroll", onScroll, { passive: true });
+                    return () => window.removeEventListener("scroll", onScroll);
+                  }, []);
                       <X className="h-5 w-5" />
-                    </Button>
+                    <header className={`sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 ${scrolled ? "scrolled" : ""}`}>
                   </DrawerClose>
                 </div>
               </DrawerHeader>
