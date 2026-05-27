@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ArrowLeftRight, Calendar, Car, MapPin, Bus as BusIcon, Search, Users } from "lucide-react";
+import { Calendar, Car, MapPin, Bus as BusIcon, Search, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SwapButton } from "@/components/swap-button";
 import type { VehicleType } from "@/lib/mock-results";
 import { POPULAR_CITIES } from "@/lib/mock-results";
 
@@ -56,112 +57,134 @@ export function SearchForm({ initial }: Props) {
   const showTripType = type !== "bus";
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border bg-card p-4 shadow-elevated md:p-6">
-      <Tabs value={type} onValueChange={(v) => setType(v as VehicleType)} className="mb-4">
-        <TabsList className="grid w-full max-w-md grid-cols-3">
-          <TabsTrigger value="taxi" className="gap-2">
-            <Car className="h-4 w-4" /> Taxi
-          </TabsTrigger>
-          <TabsTrigger value="sharing" className="gap-2">
-            <Users className="h-4 w-4" /> Sharing
-          </TabsTrigger>
-          <TabsTrigger value="bus" className="gap-2">
-            <BusIcon className="h-4 w-4" /> Bus
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
+    <form onSubmit={onSubmit} className="w-full space-y-6">
+      {/* Service Type Tabs */}
+      <div className="flex justify-between items-center">
+        <Tabs value={type} onValueChange={(v) => setType(v as VehicleType)} className="w-full">
+          <TabsList className="grid w-full grid-cols-3 bg-white/30 backdrop-blur-sm p-1 rounded-xl border border-white/10">
+            <TabsTrigger 
+              value="taxi" 
+              className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-glow rounded-lg transition-all duration-300"
+            >
+              <Car className="h-4 w-4" /> 
+              <span className="hidden sm:inline text-sm font-medium">Taxi</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="sharing" 
+              className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-glow rounded-lg transition-all duration-300"
+            >
+              <Users className="h-4 w-4" /> 
+              <span className="hidden sm:inline text-sm font-medium">Sharing</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="bus" 
+              className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-glow rounded-lg transition-all duration-300"
+            >
+              <BusIcon className="h-4 w-4" /> 
+              <span className="hidden sm:inline text-sm font-medium">Bus</span>
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
 
+      {/* Trip Type Pills */}
       {showTripType && (
-        <div className="mb-4 inline-flex rounded-full border bg-muted/40 p-1 text-sm">
+        <div className="flex gap-3">
           {(["one-way", "round-trip"] as const).map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTripType(t)}
-              className={`rounded-full px-4 py-1.5 capitalize transition ${
-                tripType === t ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
+                tripType === t
+                  ? "bg-gradient-primary text-white shadow-glow scale-105"
+                  : "bg-white/40 text-foreground/70 hover:bg-white/60 border border-white/20"
               }`}
             >
-              {t.replace("-", " ")}
+              {t === "one-way" ? "One Way" : "Round Trip"}
             </button>
           ))}
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_auto_1fr_1fr_1fr_auto] md:items-end">
-        <div className="space-y-1.5">
-          <Label htmlFor="from" className="text-xs font-medium text-muted-foreground">
-            PICKUP
+      {/* Search Form Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-3 relative">
+        {/* Pickup Location */}
+        <div className="space-y-2">
+          <Label htmlFor="from" className="text-xs font-semibold text-foreground/60 uppercase tracking-wide">
+            Pickup Location
           </Label>
-          <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative group">
+            <div className="premium-icon-wrapper absolute left-3 top-1/2 -translate-y-1/2 z-10 group-focus-within:scale-110">
+              <MapPin className="h-4 w-4" />
+            </div>
             <Input
               id="from"
               list="cities"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              placeholder="Pickup city"
-              className="h-12 pl-9 text-base"
+              placeholder="Select city"
+              className="premium-input pl-11 text-sm font-medium placeholder:text-foreground/40"
               required
             />
           </div>
         </div>
 
-        <div className="hidden md:flex md:items-end md:justify-center md:pb-1">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={swap}
-            className="rounded-full"
-            aria-label="Swap cities"
-          >
-            <ArrowLeftRight className="h-4 w-4" />
-          </Button>
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="to" className="text-xs font-medium text-muted-foreground">
-            DROP
+        {/* Drop Location */}
+        <div className="space-y-2 relative">
+          <Label htmlFor="to" className="text-xs font-semibold text-foreground/60 uppercase tracking-wide">
+            Drop Location
           </Label>
-          <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative group">
+            <div className="premium-icon-wrapper absolute left-3 top-1/2 -translate-y-1/2 z-10 group-focus-within:scale-110">
+              <MapPin className="h-4 w-4" />
+            </div>
             <Input
               id="to"
               list="cities"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              placeholder="Drop city"
-              className="h-12 pl-9 text-base"
+              placeholder="Select city"
+              className="premium-input pl-11 text-sm font-medium placeholder:text-foreground/40"
               required
             />
           </div>
+          {/* Swap Button - positioned between fields on desktop */}
+          <div className="hidden lg:block absolute -right-6 top-12">
+            <SwapButton onClick={swap} />
+          </div>
         </div>
 
-        <div className="space-y-1.5">
-          <Label htmlFor="date" className="text-xs font-medium text-muted-foreground">
-            DATE
+        {/* Pickup Date */}
+        <div className="space-y-2">
+          <Label htmlFor="date" className="text-xs font-semibold text-foreground/60 uppercase tracking-wide">
+            Pickup Date
           </Label>
-          <div className="relative">
-            <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative group">
+            <div className="premium-icon-wrapper absolute left-3 top-1/2 -translate-y-1/2 z-10 group-focus-within:scale-110">
+              <Calendar className="h-4 w-4" />
+            </div>
             <Input
               id="date"
               type="date"
               value={date}
               min={today}
               onChange={(e) => setDate(e.target.value)}
-              className="h-12 pl-9 text-base"
+              className="premium-input pl-11 text-sm font-medium"
               required
             />
           </div>
         </div>
 
-        <div className="space-y-1.5">
-          <Label htmlFor="rdate" className="text-xs font-medium text-muted-foreground">
-            {tripType === "round-trip" && showTripType ? "RETURN" : "RETURN (optional)"}
+        {/* Return Date / Passengers */}
+        <div className="space-y-2">
+          <Label htmlFor="rdate" className="text-xs font-semibold text-foreground/60 uppercase tracking-wide">
+            {tripType === "round-trip" && showTripType ? "Return Date" : "Return (Optional)"}
           </Label>
-          <div className="relative">
-            <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative group">
+            <div className="premium-icon-wrapper absolute left-3 top-1/2 -translate-y-1/2 z-10 group-focus-within:scale-110">
+              <Calendar className="h-4 w-4" />
+            </div>
             <Input
               id="rdate"
               type="date"
@@ -169,18 +192,32 @@ export function SearchForm({ initial }: Props) {
               min={date || today}
               disabled={!showTripType || tripType === "one-way"}
               onChange={(e) => setReturnDate(e.target.value)}
-              className="h-12 pl-9 text-base"
+              className="premium-input pl-11 text-sm font-medium disabled:opacity-60"
               required={tripType === "round-trip" && showTripType}
             />
           </div>
         </div>
+      </div>
 
+      {/* Mobile Swap Button */}
+      <div className="lg:hidden flex justify-center pt-2">
+        <button
+          onClick={swap}
+          type="button"
+          className="px-6 py-2 rounded-full bg-white/40 border border-white/20 hover:bg-white/60 transition-all text-sm font-medium text-foreground/70"
+        >
+          Swap Locations
+        </button>
+      </div>
+
+      {/* Search Button */}
+      <div className="flex justify-center pt-4">
         <Button
           type="submit"
-          size="lg"
-          className="h-12 gap-2 bg-gradient-primary shadow-glow md:px-8"
+          className="premium-btn gap-2 px-8 md:px-12 text-base font-semibold hover-lift"
         >
-          <Search className="h-4 w-4" /> Search
+          <Search className="h-5 w-5" /> 
+          <span>Search Rides</span>
         </Button>
       </div>
 
