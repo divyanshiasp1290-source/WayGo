@@ -204,6 +204,32 @@
     gap: 0.5rem;
   }
 
+  /* Nav link underline animation */
+  header nav a {
+    position: relative;
+    padding: 0.5rem 0.6rem;
+    color: var(--color-muted-foreground);
+    font-weight: 600;
+  }
+  header nav a::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 6px;
+    height: 2px;
+    background: linear-gradient(90deg, #0B5ED7, #004AAD);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms ease;
+    opacity: 0.95;
+  }
+  header nav a:hover::after,
+  header nav a[data-status='active']::after {
+    transform: scaleX(1);
+  }
+
   @media (max-width: 768px) {
     header > .container {
       grid-template-columns: auto auto;
