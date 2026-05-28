@@ -26,148 +26,119 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden min-h-[calc(100vh-64px)]">
-        <div className="absolute inset-0">
-          <img
-            src={heroImg}
-            alt="Modern taxi and bus on a scenic highway"
-            className="h-full w-full object-cover scale-105"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(8,106,220,0.52),transparent_28%),linear-gradient(180deg,rgba(1,10,23,0.88)_0%,rgba(3,15,31,0.82)_42%,rgba(2,8,19,0.9)_100%)]" />
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.08),transparent_24%,rgba(255,255,255,0.04)_72%,transparent)]" />
-            <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-[#0b5ed7]/20 blur-3xl" />
-            <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
-          </div>
+      {/* MakeMyTrip-style hero with floating card and tabs */}
+      <section className="relative min-h-[calc(100vh-64px)] bg-gradient-to-b from-[#f7fafd] to-[#eaf2fb] flex flex-col justify-start items-center pb-0">
+        {/* Background image overlay */}
+        <div className="absolute inset-0 -z-10">
+          <img src={heroImg} alt="Travel" className="w-full h-full object-cover object-top opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0b223f]/80 via-[#0b223f]/60 to-[#eaf2fb]/0" />
         </div>
 
-        <div className="container relative mx-auto h-full min-h-[calc(100vh-64px)] px-4 py-6">
-          <div className="grid min-h-[calc(100vh-80px)] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-            <div className="max-w-2xl pt-4">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.24em] text-[#d9ebff] backdrop-blur">
-                <Star className="h-3.5 w-3.5 fill-yellow-300 text-yellow-300" />
-                Trusted by 1M+ travellers
-              </div>
-
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.26em] text-[#8ec5ff]">
-                Move smarter
-              </p>
-              <h1 className="text-5xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
-                Plan your next
-                <span className="block bg-gradient-to-r from-[#8ec5ff] via-[#5fa8ff] to-[#8ad0ff] bg-clip-text text-transparent">
-                  perfect trip.
-                </span>
-              </h1>
-              <p className="mt-5 max-w-xl text-base text-slate-200 md:text-lg">
-                Search taxis, shared rides, and buses with live pricing, premium operators, and instant confirmation in one place.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-white/85">
-                {['Instant booking', 'Best fares', 'Live tracking'].map((label) => (
-                  <span key={label} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur">
-                    {label}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {[
-                  { value: '24/7', label: 'Support' },
-                  { value: '1.8K+', label: 'Routes' },
-                  { value: '4.8/5', label: 'Ratings' },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 backdrop-blur">
-                    <p className="text-xl font-bold text-white">{stat.value}</p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#b9dbff]">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:justify-self-end">
-              <div className="rounded-[30px] border border-white/12 bg-white/78 p-3 shadow-[0_30px_90px_-35px_rgba(2,10,25,0.9)] backdrop-blur-xl md:p-4">
-                <div className="rounded-[26px] bg-[#021c3f]/95 p-5 text-white md:p-6">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8ec5ff]">
-                        Book your ride
-                      </p>
-                      <h2 className="mt-2 text-2xl font-bold tracking-tight text-white md:text-3xl">
-                        Search & compare in seconds
-                      </h2>
-                    </div>
-                    <span className="rounded-full bg-[#0b5ed7]/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e6f2ff]">
-                      Live fares
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-slate-200/85">
-                    Powered by your pickup, drop, and preferred travel mode.
-                  </p>
-                  <div className="mt-5 rounded-[22px] border border-white/10 bg-white/90 p-4 text-slate-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
-                    <SearchForm />
-                  </div>
+        {/* Floating Card */}
+        <div className="w-full flex flex-col items-center pt-12">
+          <div className="w-full max-w-5xl rounded-3xl shadow-[0_8px_48px_-12px_rgba(9,55,139,0.13)] bg-white border border-slate-100 px-0 md:px-8 py-8 flex flex-col items-center">
+            {/* Top Tabs */}
+            <div className="w-full flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+              {[
+                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M3 17V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Flights" },
+                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M3 17V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" stroke="#0b5ed7" strokeWidth="1.5"/><circle cx="12" cy="12" r="3" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Hotels" },
+                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Buses", active: true },
+                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><circle cx="12" cy="12" r="3" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Cabs" },
+                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Trains" },
+              ].map((tab, i) => (
+                <div key={tab.label} className={`flex flex-col items-center px-4 py-2 rounded-2xl cursor-pointer transition-all ${tab.active ? "bg-[#eaf2fb] shadow-[0_2px_12px_-2px_rgba(11,94,215,0.08)] border border-blue-200" : "hover:bg-blue-50"}`}>
+                  <span>{tab.icon}</span>
+                  <span className={`mt-1 text-xs font-bold tracking-wide ${tab.active ? "text-[#0b5ed7]" : "text-slate-700"}`}>{tab.label}</span>
                 </div>
+              ))}
+            </div>
+
+            {/* Search Card */}
+            <div className="w-full flex flex-col items-center">
+              <div className="w-full max-w-3xl mx-auto">
+                <SearchForm />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="text-center">
-            <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white/65">Scroll to explore</div>
-            <svg className="mx-auto h-5 w-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-           WHY CHOOSE US - Premium Features
-           ============================================================ */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
-              Why Choose WayGo
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Everything you need for a seamless travel experience
-            </p>
+      {/* MakeMyTrip-style Offers Section */}
+      <section className="w-full flex flex-col items-center bg-[#f7fafd] pt-12 pb-20">
+        <div className="w-full max-w-5xl rounded-3xl bg-white border border-slate-100 shadow-[0_8px_48px_-12px_rgba(9,55,139,0.07)] px-0 md:px-8 py-8 flex flex-col items-center">
+          {/* Offers Tabs */}
+          <div className="w-full flex flex-wrap gap-2 md:gap-4 mb-8 border-b border-slate-100 pb-2">
+            {[
+              { label: "Bus", active: true },
+              { label: "All Offers" },
+              { label: "Cabs" },
+              { label: "Hotels" },
+              { label: "Flights" },
+              { label: "Holidays" },
+              { label: "Trains" },
+            ].map((tab) => (
+              <button
+                key={tab.label}
+                className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-150 ${tab.active ? "bg-[#eaf2fb] text-[#0b5ed7] shadow" : "text-slate-700 hover:bg-blue-50"}`}
+                tabIndex={tab.active ? 0 : -1}
+                aria-selected={tab.active}
+              >
+                {tab.label}
+              </button>
+            ))}
+            <div className="ml-auto flex items-center gap-2">
+              <span className="text-xs font-semibold text-blue-700 cursor-pointer hover:underline">VIEW ALL</span>
+              <span className="text-blue-400">→</span>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {/* Offers Cards */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: Wallet,
-                title: "Best Price Guarantee",
-                desc: "Transparent fares with zero hidden fees. What you see is what you pay.",
+                title: "Escape to the Hills with Up to 40% OFF*",
+                desc: "on buses, cabs, trains, holiday packages, stays and flights.",
+                code: "MMTSUMMER",
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
               },
               {
-                icon: Zap,
-                title: "Instant Confirmation",
-                desc: "Book and receive your ticket instantly. No waiting, no hassle.",
+                title: "Book 3 Bus Tickets & Get 1 Free",
+                desc: "Use Code: FREEFORYOU",
+                code: "FREEFORYOU",
+                img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
               },
               {
-                icon: Shield,
-                title: "Verified Operators",
-                desc: "Only safety-checked, top-rated taxi and bus partners.",
+                title: "Grab Up to ₹300 OFF*",
+                desc: "on bus tickets Use Code: MMTSUMMER",
+                code: "MMTSUMMER",
+                img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
               },
-            ].map((feature, i) => (
-              <div
-                key={i}
-                className="premium-card p-8 hover-lift group"
-              >
-                <div className="premium-icon-wrapper mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="h-6 w-6" />
+              {
+                title: "Grab FLAT ₹200 OFF* on Bus Tickets",
+                desc: "And escape to the hills. Use Code: BOOKBUS",
+                code: "BOOKBUS",
+                img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
+              },
+              {
+                title: "Weekend Bus Bonanza",
+                desc: "Grab exclusive deals for your corporate trips.",
+                code: "WEEKEND",
+                img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3fdc?auto=format&fit=crop&w=400&q=80",
+              },
+            ].map((offer) => (
+              <div key={offer.title} className="flex flex-col md:flex-row bg-[#f7fafd] rounded-2xl border border-slate-100 shadow hover:shadow-lg transition-all overflow-hidden">
+                <img src={offer.img} alt={offer.title} className="w-full md:w-32 h-32 object-cover" />
+                <div className="flex-1 p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="text-xs font-bold text-blue-700 mb-1">T&C'S APPLY</div>
+                    <div className="font-bold text-base text-slate-900 mb-1">{offer.title}</div>
+                    <div className="text-xs text-slate-600 mb-2">{offer.desc}</div>
+                    <div className="text-xs font-mono text-blue-700">Code: {offer.code}</div>
+                  </div>
+                  <div className="mt-3">
+                    <button className="text-blue-600 font-bold text-xs underline hover:text-blue-800">BOOK NOW</button>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {feature.desc}
-                </p>
               </div>
             ))}
           </div>
