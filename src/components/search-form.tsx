@@ -26,7 +26,7 @@ interface Props {
 export function SearchForm({ className, initial }: Props) {
   const navigate = useNavigate();
   const today = new Date().toISOString().slice(0, 10);
-  const [type, setType] = useState<VehicleType>(initial?.type ?? "taxi");
+  const [type, setType] = useState<VehicleType>(initial?.type ?? "cab");
   const [tripType, setTripType] = useState<TripType>(initial?.tripType ?? "one-way");
   const [from, setFrom] = useState(initial?.from ?? "");
   const [to, setTo] = useState(initial?.to ?? "");
@@ -60,23 +60,25 @@ export function SearchForm({ className, initial }: Props) {
 
   const showTripType = type !== "bus";
 
+  const allowedTypes: VehicleType[] = ["cab", "bus", "sharing"];
+
+  const filteredTabs = [
+    { value: "cab", label: "Cab", icon: <Car className="h-4 w-4" /> },
+    { value: "bus", label: "Bus", icon: <BusIcon className="h-4 w-4" /> },
+    { value: "sharing", label: "Shared Taxi", icon: <Users className="h-4 w-4" /> },
+  ];
+
   return (
     <form onSubmit={onSubmit} className={cn("w-full space-y-5 md:space-y-6", className)}>
       <div className="rounded-2xl border border-slate-200/70 bg-[#f8fbff] p-1.5">
         <Tabs value={type} onValueChange={(v) => setType(v as VehicleType)} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="taxi" className="gap-2">
-              <Car className="h-4 w-4" />
-              <span className="hidden sm:inline">Taxi</span>
-            </TabsTrigger>
-            <TabsTrigger value="sharing" className="gap-2">
-              <Users className="h-4 w-4" />
-              <span className="hidden sm:inline">Sharing</span>
-            </TabsTrigger>
-            <TabsTrigger value="bus" className="gap-2">
-              <BusIcon className="h-4 w-4" />
-              <span className="hidden sm:inline">Bus</span>
-            </TabsTrigger>
+            {filteredTabs.map((tab) => (
+              <TabsTrigger key={tab.value} value={tab.value} className="gap-2">
+                {tab.icon}
+                <span className="hidden sm:inline">{tab.label}</span>
+              </TabsTrigger>
+            ))}
           </TabsList>
         </Tabs>
       </div>
