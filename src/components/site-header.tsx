@@ -36,44 +36,44 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/88 backdrop-blur supports-[backdrop-filter]:bg-white/78 ${
+      className={`sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/72 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/72 ${
         scrolled ? "scrolled" : ""
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-glow group-hover:shadow-glow transition-all duration-300">
-            <Bus className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0b5ed7] to-[#083f92] shadow-[0_12px_34px_-18px_rgba(11,94,215,0.95)] group-hover:-translate-y-0.5 transition-all duration-300">
+            <Bus className="h-5 w-5 text-white" />
           </div>
-          <span className="text-lg font-bold tracking-tight hidden sm:inline">
-            Way<span className="text-primary">Go</span>
+          <span className="text-lg font-bold tracking-tight hidden sm:inline text-white">
+            Way<span className="text-[#74b7ff]">Go</span>
           </span>
         </Link>
 
         {/* Center nav */}
         <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
-          <Link to="/" activeOptions={{ exact: true }} className="relative rounded-full px-3 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all duration-200 group">
+          <Link to="/" activeOptions={{ exact: true }} className="relative rounded-full px-3 py-2 text-sm font-semibold text-white/80 hover:text-white transition-all duration-200 group">
             Home
-            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#74b7ff] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>
-          <Link to="/about" className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 group">
+          <Link to="/about" className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 group">
             About
-            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#74b7ff] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>
-          <Link to="/contact" className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 group">
+          <Link to="/contact" className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 group">
             Contact
-            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#74b7ff] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>
           {user && (
             <>
-              <Link to="/dashboard" className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 group">
+              <Link to="/dashboard" className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 group">
                 Bookings
-                <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#74b7ff] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
-              <Link to="/wallet" className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 group">
+              <Link to="/wallet" className="relative px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 group">
                 Wallet
-                <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#74b7ff] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             </>
           )}
@@ -84,7 +84,7 @@ export function SiteHeader() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="gap-2 border-white/20 hover:bg-white/10 hover-lift">
+                <Button variant="outline" size="sm" className="gap-2 border-white/20 bg-white/10 text-white hover:bg-white/15 hover-lift">
                   <UserIcon className="h-4 w-4" />
                   <span className="hidden max-w-[120px] truncate sm:inline text-sm font-medium">{user.email}</span>
                 </Button>
@@ -106,7 +106,7 @@ export function SiteHeader() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm" className="premium-btn shadow-glow" onClick={() => navigate({ to: "/auth" })}>
+            <Button size="sm" className="shadow-[0_16px_36px_-18px_rgba(10,79,173,0.82)]" onClick={() => navigate({ to: "/auth" })}>
               Sign in
             </Button>
           )}

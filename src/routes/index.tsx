@@ -26,11 +26,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <>
-      {/* ============================================================
-           HERO SECTION - Premium Cinematic Design
-           ============================================================ */}
       <section className="relative overflow-hidden min-h-[calc(100vh-64px)]">
-        {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
           <img
             src={heroImg}
@@ -38,58 +34,89 @@ function HomePage() {
             className="h-full w-full object-cover scale-105"
             loading="eager"
           />
-          {/* Premium Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-blue-900/50 to-slate-900/40" />
-          {/* Animated Gradient Shapes */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(8,106,220,0.52),transparent_28%),linear-gradient(180deg,rgba(1,10,23,0.88)_0%,rgba(3,15,31,0.82)_42%,rgba(2,8,19,0.9)_100%)]" />
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl float-animate" />
-            <div className="absolute top-1/2 -left-32 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl float-animate" style={{ animationDelay: "2s" }} />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.08),transparent_24%,rgba(255,255,255,0.04)_72%,transparent)]" />
+            <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-[#0b5ed7]/20 blur-3xl" />
+            <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
           </div>
         </div>
 
-        {/* Hero Content */}
-        <div className="container relative mx-auto px-4 h-full min-h-[calc(100vh-64px)] flex flex-col justify-center">
-          <div className="mx-auto max-w-4xl w-full pt-12">
-            {/* Trust Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl glass-effect">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm font-semibold text-white">Trusted by 1M+ Travellers</span>
+        <div className="container relative mx-auto h-full min-h-[calc(100vh-64px)] px-4 py-6">
+          <div className="grid min-h-[calc(100vh-80px)] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+            <div className="max-w-2xl pt-4">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.24em] text-[#d9ebff] backdrop-blur">
+                <Star className="h-3.5 w-3.5 fill-yellow-300 text-yellow-300" />
+                Trusted by 1M+ travellers
+              </div>
+
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.26em] text-[#8ec5ff]">
+                Move smarter
+              </p>
+              <h1 className="text-5xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
+                Plan your next
+                <span className="block bg-gradient-to-r from-[#8ec5ff] via-[#5fa8ff] to-[#8ad0ff] bg-clip-text text-transparent">
+                  perfect trip.
+                </span>
+              </h1>
+              <p className="mt-5 max-w-xl text-base text-slate-200 md:text-lg">
+                Search taxis, shared rides, and buses with live pricing, premium operators, and instant confirmation in one place.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-white/85">
+                {['Instant booking', 'Best fares', 'Live tracking'].map((label) => (
+                  <span key={label} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur">
+                    {label}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {[
+                  { value: '24/7', label: 'Support' },
+                  { value: '1.8K+', label: 'Routes' },
+                  { value: '4.8/5', label: 'Ratings' },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 backdrop-blur">
+                    <p className="text-xl font-bold text-white">{stat.value}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#b9dbff]">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-tight fade-in">
-              Book Smarter Travel
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent">
-                Experiences
-              </span>
-            </h1>
-
-            {/* Subheading */}
-            <p className="mt-6 text-lg md:text-2xl text-white/90 max-w-2xl leading-relaxed fade-in">
-              Reliable taxis, buses & rentals with real-time availability and transparent pricing.
-            </p>
-
-            {/* CTA Preview Text */}
-            <div className="mt-8 flex items-center gap-2 text-white/80 fade-in">
-              <CheckCircle2 className="h-5 w-5 text-green-400" />
-              <span className="text-sm font-medium">Instant booking • Live tracking • Best prices</span>
-            </div>
-          </div>
-
-          {/* Premium Search Card - Floating */}
-          <div className="mt-20 mb-16">
-            <div className="mx-auto max-w-5xl px-4 md:px-8 py-8 rounded-2xl glass-effect shadow-premium-xl hover-lift backdrop-blur-xl border border-white/10">
-              <SearchForm />
+            <div className="lg:justify-self-end">
+              <div className="rounded-[30px] border border-white/12 bg-white/78 p-3 shadow-[0_30px_90px_-35px_rgba(2,10,25,0.9)] backdrop-blur-xl md:p-4">
+                <div className="rounded-[26px] bg-[#021c3f]/95 p-5 text-white md:p-6">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8ec5ff]">
+                        Book your ride
+                      </p>
+                      <h2 className="mt-2 text-2xl font-bold tracking-tight text-white md:text-3xl">
+                        Search & compare in seconds
+                      </h2>
+                    </div>
+                    <span className="rounded-full bg-[#0b5ed7]/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e6f2ff]">
+                      Live fares
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-slate-200/85">
+                    Powered by your pickup, drop, and preferred travel mode.
+                  </p>
+                  <div className="mt-5 rounded-[22px] border border-white/10 bg-white/90 p-4 text-slate-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
+                    <SearchForm />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="text-center">
-            <div className="text-white/60 text-xs font-medium mb-2">Scroll to explore</div>
-            <svg className="w-5 h-5 text-white/40 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white/65">Scroll to explore</div>
+            <svg className="mx-auto h-5 w-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </div>
