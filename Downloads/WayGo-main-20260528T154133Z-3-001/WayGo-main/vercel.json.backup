@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/(assets|src|_next|.*\\.(?:js|mjs|cjs|css|map|png|jpg|jpeg|gif|svg|webp|woff2|woff|ttf|eot))$",
+      "destination": "/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
