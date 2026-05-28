@@ -27,7 +27,7 @@ function HomePage() {
   return (
     <>
       {/* MakeMyTrip-style hero with floating card and tabs */}
-      <section className="relative min-h-[calc(100vh-64px)] bg-gradient-to-b from-[#f7fafd] to-[#eaf2fb] flex flex-col justify-start items-center pb-0">
+      <section className="relative min-h-[calc(100vh-64px)] bg-[#f7fafd] flex flex-col justify-start items-center pb-0">
         {/* Background image overlay */}
         <div className="absolute inset-0 -z-10">
           <img src={heroImg} alt="Travel" className="w-full h-full object-cover object-top opacity-60" />
@@ -40,11 +40,16 @@ function HomePage() {
             {/* Top Tabs */}
             <div className="w-full flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
               {[
-                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M3 17V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Flights" },
-                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M3 17V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" stroke="#0b5ed7" strokeWidth="1.5"/><circle cx="12" cy="12" r="3" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Hotels" },
-                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Buses", active: true },
-                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><circle cx="12" cy="12" r="3" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Cabs" },
-                { icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#0b5ed7" strokeWidth="1.5"/><path d="M7 17V7m10 10V7" stroke="#0b5ed7" strokeWidth="1.5"/></svg>, label: "Trains" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">flight</span>, label: "Flights" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">hotel</span>, label: "Hotels" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">villa</span>, label: "Villas & Homestays" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">holiday_village</span>, label: "Holiday Packages" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">train</span>, label: "Trains" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">directions_bus</span>, label: "Buses", active: true },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">local_taxi</span>, label: "Cabs" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">attractions</span>, label: "Tours & Attractions" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">credit_card</span>, label: "Forex Card & Currency" },
+                { icon: <span className="material-symbols-outlined text-3xl text-[#0b5ed7]">card_travel</span>, label: "Travel Insurance" },
               ].map((tab, i) => (
                 <div key={tab.label} className={`flex flex-col items-center px-4 py-2 rounded-2xl cursor-pointer transition-all ${tab.active ? "bg-[#eaf2fb] shadow-[0_2px_12px_-2px_rgba(11,94,215,0.08)] border border-blue-200" : "hover:bg-blue-50"}`}>
                   <span>{tab.icon}</span>
