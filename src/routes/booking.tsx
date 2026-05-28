@@ -193,30 +193,40 @@ function BookingPage() {
   });
 
   return (
-    <div className="bg-muted/30 pb-16">
+    <div className="travel-shell pb-16">
       <div className="container mx-auto px-4 py-6">
-        <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2 gap-1.5">
-          <Link
-            to="/search"
-            search={{
-              type: params.type,
-              from: params.from,
-              to: params.to,
-              date: params.date,
-              tripType: params.tripType,
-              ...(params.returnDate ? { returnDate: params.returnDate } : {}),
-            }}
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to results
-          </Link>
-        </Button>
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <Button asChild variant="ghost" size="sm" className="-ml-2 gap-1.5">
+            <Link
+              to="/search"
+              search={{
+                type: params.type,
+                from: params.from,
+                to: params.to,
+                date: params.date,
+                tripType: params.tripType,
+                ...(params.returnDate ? { returnDate: params.returnDate } : {}),
+              }}
+            >
+              <ArrowLeft className="h-4 w-4" /> Back to results
+            </Link>
+          </Button>
+          <span className="travel-kicker px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em]">
+            Secure checkout
+          </span>
+        </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-          <div className="rounded-2xl border bg-card p-6 shadow-soft md:p-8">
-            <h1 className="text-2xl font-bold tracking-tight">Passenger details</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              We'll send your booking confirmation to your account.
-            </p>
+          <div className="travel-surface p-6 md:p-8">
+            <div className="mb-6 rounded-3xl bg-[#f5f9ff] p-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#008cff]">
+                Passenger details
+              </p>
+              <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">Complete your booking</h1>
+              <p className="mt-1 text-sm text-slate-500">
+                We'll send your booking confirmation to your account and keep your journey details ready.
+              </p>
+            </div>
 
             {!authLoading && !user && (
               <div className="mt-4 flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm">
@@ -350,10 +360,10 @@ function BookingPage() {
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-2xl border bg-card p-6 shadow-soft">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            <div className="travel-surface p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#008cff]">
                 Trip summary
-              </h2>
+              </p>
               <div className="mt-3">
                 <h3 className="text-lg font-semibold">{result.operator}</h3>
                 <p className="text-sm text-muted-foreground">{result.vehicleClass}</p>

@@ -36,11 +36,11 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 ${
+      className={`sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/88 backdrop-blur supports-[backdrop-filter]:bg-white/78 ${
         scrolled ? "scrolled" : ""
       }`}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-glow group-hover:shadow-glow transition-all duration-300">
@@ -52,8 +52,8 @@ export function SiteHeader() {
         </Link>
 
         {/* Center nav */}
-        <nav className="hidden items-center gap-2 md:flex absolute left-1/2 -translate-x-1/2">
-          <Link to="/" activeOptions={{ exact: true }} className="relative px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 group">
+        <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
+          <Link to="/" activeOptions={{ exact: true }} className="relative rounded-full px-3 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all duration-200 group">
             Home
             <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-primary rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </Link>

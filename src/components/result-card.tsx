@@ -23,18 +23,23 @@ export function ResultCard({ result, searchParams }: Props) {
   const mins = result.durationMin % 60;
 
   return (
-    <Card className="overflow-hidden p-4 transition hover:shadow-md md:p-5">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-start gap-3 md:flex-1">
-          <div className="rounded-lg bg-primary/10 p-2.5 text-primary">
+    <Card className="overflow-hidden p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevated md:p-6">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-start gap-3 lg:flex-1">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#e8f2ff] text-[#008cff]">
             <Icon className="h-5 w-5" />
           </div>
           <div className="min-w-0">
-            <h3 className="font-semibold leading-tight">{result.operator}</h3>
-            <p className="text-sm text-muted-foreground">{result.vehicleClass}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
+            <div className="flex items-center gap-2">
+              <h3 className="font-bold leading-tight text-slate-900">{result.operator}</h3>
+              <Badge variant="outline" className="rounded-full px-2 py-0.5 text-[9px]">
+                {result.type === "taxi" ? "Taxi" : result.type === "sharing" ? "Shared" : "Bus"}
+              </Badge>
+            </div>
+            <p className="mt-0.5 text-sm text-slate-500">{result.vehicleClass}</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
               {result.amenities.slice(0, 3).map((a) => (
-                <Badge key={a} variant="secondary" className="text-xs font-normal">
+                <Badge key={a} variant="secondary" className="rounded-full bg-[#f0f6ff] text-[10px] font-medium text-slate-700">
                   {a}
                 </Badge>
               ))}
@@ -42,38 +47,38 @@ export function ResultCard({ result, searchParams }: Props) {
           </div>
         </div>
 
-        <div className="flex items-center gap-6 md:flex-1 md:justify-center">
+        <div className="flex items-center gap-5 rounded-2xl bg-[#f9fbff] px-4 py-3 lg:flex-1 lg:justify-center">
           <div className="text-center">
-            <div className="text-lg font-bold tabular-nums">{result.departure}</div>
-            <div className="text-xs text-muted-foreground">{searchParams.from}</div>
+            <div className="text-xl font-bold tabular-nums text-slate-900">{result.departure}</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">{searchParams.from}</div>
           </div>
-          <div className="flex flex-col items-center text-xs text-muted-foreground">
-            <Clock className="h-3.5 w-3.5" />
-            <span className="mt-0.5">
+          <div className="flex flex-col items-center text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <Clock className="h-3.5 w-3.5 text-[#008cff]" />
+            <span className="mt-1 text-slate-600">
               {hours}h {mins > 0 ? `${mins}m` : ""}
             </span>
           </div>
           <div className="text-center">
-            <div className="text-lg font-bold tabular-nums">{result.arrival}</div>
-            <div className="text-xs text-muted-foreground">{searchParams.to}</div>
+            <div className="text-xl font-bold tabular-nums text-slate-900">{result.arrival}</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">{searchParams.to}</div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4 md:flex-col md:items-end">
+        <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-end">
           <div className="text-right">
-            <div className="text-2xl font-bold text-primary">₹{result.price}</div>
-            <div className="flex items-center justify-end gap-2 text-xs text-muted-foreground">
-              <span className="flex items-center gap-0.5">
+            <div className="text-3xl font-bold text-[#008cff]">₹{result.price}</div>
+            <div className="mt-1 flex items-center justify-end gap-2 text-xs text-slate-500">
+              <span className="flex items-center gap-0.5 font-semibold">
                 <Star className="h-3 w-3 fill-current text-amber-500" />
                 {result.rating.toFixed(1)}
               </span>
-              <span className="flex items-center gap-0.5">
+              <span className="flex items-center gap-0.5 font-semibold">
                 <Users className="h-3 w-3" />
                 {result.seatsAvailable} left
               </span>
             </div>
           </div>
-          <Button asChild size="sm">
+          <Button asChild size="sm" className="premium-btn px-4">
             <Link
               to="/booking"
               search={{

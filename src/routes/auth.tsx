@@ -150,18 +150,45 @@ function AuthPage() {
 
 
   return (
-    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
-        <Link to="/" className="mb-6 flex items-center justify-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
-            <Bus className="h-5 w-5 text-primary-foreground" />
+    <div className="travel-shell">
+      <div className="container mx-auto grid min-h-[calc(100vh-4rem)] gap-6 px-4 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <section className="travel-surface p-6 md:p-8">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#e8f2ff] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#008cff]">
+            <Bus className="h-3.5 w-3.5" /> WayGo travel
           </div>
-          <span className="text-xl font-bold">
-            Way<span className="text-primary">Go</span>
-          </span>
-        </Link>
+          <h1 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+            Book with confidence.
+          </h1>
+          <p className="mt-3 max-w-xl text-sm text-slate-600 md:text-base">
+            Search, compare, and confirm taxis, shared rides, and buses in one premium booking journey.
+          </p>
 
-        <div className="rounded-2xl border bg-card p-6 shadow-elevated md:p-8">
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {[
+              { title: "Flexible search", caption: "Route + date + trip type" },
+              { title: "Live confirmations", caption: "Instant operator updates" },
+              { title: "Secure payments", caption: "Protected checkout" },
+              { title: "Traveler tracking", caption: "Booking status at a glance" },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-slate-200 bg-white/88 p-4">
+                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+                <p className="mt-1 text-xs text-slate-500">{item.caption}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="w-full max-w-xl justify-self-center">
+          <Link to="/" className="mb-6 flex items-center justify-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
+              <Bus className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <span className="text-xl font-bold">
+              Way<span className="text-primary">Go</span>
+            </span>
+          </Link>
+
+          <div className="travel-surface p-6 shadow-elevated md:p-8">
           <h1 className="text-2xl font-bold tracking-tight">Welcome</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Sign in or create an account.
@@ -242,11 +269,12 @@ function AuthPage() {
 
 
           </Tabs>
-        </div>
+          </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          By continuing you agree to WayGo's terms and privacy policy.
-        </p>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            By continuing you agree to WayGo's terms and privacy policy.
+          </p>
+        </section>
       </div>
     </div>
   );

@@ -19,21 +19,24 @@ function PaymentSuccessPage() {
   const ref = "WG" + Math.floor(100000 + Math.random() * 900000);
 
   return (
-    <div className="bg-muted/30 pb-16">
+    <div className="travel-shell pb-16">
       <div className="container mx-auto max-w-2xl px-4 py-12">
-        <div className="overflow-hidden rounded-2xl border bg-card shadow-elevated">
+        <div className="overflow-hidden rounded-[28px] border border-slate-200/70 bg-white/80 shadow-premium-xl backdrop-blur">
           <div className="bg-gradient-hero p-8 text-center text-primary-foreground">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/15 backdrop-blur">
               <CheckCircle2 className="h-9 w-9" />
             </div>
-            <h1 className="mt-4 text-2xl font-bold">Payment successful</h1>
+            <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">
+              Confirmation ready
+            </p>
+            <h1 className="mt-2 text-2xl font-bold">Payment successful</h1>
             <p className="mt-1 text-white/85">
               Your booking is confirmed. A receipt is on its way.
             </p>
           </div>
 
-          <div className="space-y-4 p-6 md:p-8">
-            <div className="flex items-center justify-between border-b pb-4">
+          <div className="travel-surface space-y-4 p-6 md:p-8">
+            <div className="flex items-center justify-between border-b border-slate-200/80 pb-4">
               <span className="text-sm text-muted-foreground">Booking reference</span>
               <span className="font-mono text-base font-semibold">{ref}</span>
             </div>

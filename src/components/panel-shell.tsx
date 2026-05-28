@@ -23,10 +23,10 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
     <Link
       to={item.to}
       className={cn(
-        "relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-smooth",
+        "relative flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition-all duration-200",
         active
-          ? "bg-primary text-primary-foreground shadow-soft"
-          : "text-muted-foreground hover:bg-accent hover:text-foreground",
+          ? "bg-gradient-primary text-primary-foreground shadow-glow"
+          : "text-slate-600 hover:bg-[#e8f2ff] hover:text-slate-900",
       )}
     >
       <item.icon className="h-4 w-4 shrink-0" />
@@ -45,8 +45,8 @@ export function PanelShell({ title, subtitle, nav, children, layout = "sidebar" 
 
   if (layout === "topbar") {
     return (
-      <div className="bg-muted/30">
-        <div className="sticky top-16 z-40 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+      <div className="travel-shell">
+        <div className="sticky top-16 z-40 border-b border-slate-200/70 bg-white/88 backdrop-blur supports-[backdrop-filter]:bg-white/78">
           <div className="container mx-auto px-4">
             <div className="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between">
               <div>
@@ -70,10 +70,10 @@ export function PanelShell({ title, subtitle, nav, children, layout = "sidebar" 
   }
 
   return (
-    <div className="bg-muted/30">
-      <div className="container mx-auto grid gap-6 px-4 py-6 lg:grid-cols-[240px_1fr]">
+    <div className="travel-shell">
+      <div className="container mx-auto grid gap-6 px-4 py-6 lg:grid-cols-[260px_1fr]">
         <aside className="lg:sticky lg:top-20 lg:h-[calc(100vh-6rem)]">
-          <div className="rounded-2xl border bg-card p-4 shadow-soft">
+          <div className="travel-surface p-4">
             <div className="mb-4 px-2">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {subtitle ?? "Panel"}
